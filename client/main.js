@@ -1,18 +1,10 @@
-import angular from 'angular';
-import angularMeteor from 'angular-meteor';
-import todosList from '../imports/components/todosList/todosList';
- 
-angular.module('simple-todos', [
-  angularMeteor,
-  todosList.name
-]);
+import React from 'react';
+import { Meteor } from 'meteor/meteor';
+import { render } from 'react-dom';
 
-function onReady() {
-  angular.bootstrap(document, ['simple-todos']);
-}
+import '../imports/startup/accounts-config.js'; 
+import App from '../imports/ui/App.js';
  
-if (Meteor.isCordova) {
-  angular.element(document).on('deviceready', onReady);
-} else {
-  angular.element(document).ready(onReady);
-}
+Meteor.startup(() => {
+  render(<App />, document.getElementById('render-target'));
+});
